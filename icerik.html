@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kedilerin Büyülü Dünyası</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* genel tasarım */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* üst kısım ve menü */
+        header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.5s ease;
+        }
+
+        header h1 {
+            color: white;
+            margin: 0 0 15px 0;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav button {
+            background-color: white;
+            color: #ff758c;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav button:hover, nav button.active {
+            background-color: #ff758c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* sayfa bölümleri */
+        .page-section {
+            display: none; 
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* kutular */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #ff9a9e;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .card h3, .card h2 {
+            color: #ff758c;
+            margin-top: 0;
+            border-bottom: 2px solid #fecfef;
+            padding-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        /* gece modu cssleri */
+        body.dark-mode {
+            background-color: #1a1a2e !important;
+            color: #e6e6e6 !important;
+        }
+        body.dark-mode header {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%) !important;
+        }
+        body.dark-mode .card, 
+        body.dark-mode .info-item, 
+        body.dark-mode .professional-list li,
+        body.dark-mode .hesap-kutu,
+        body.dark-mode table,
+        body.dark-mode th,
+        body.dark-mode td,
+        body.dark-mode tr {
+            background-color: #16213e !important;
+            border-color: #e94560 !important;
+            color: #e6e6e6 !important;
+        }
+        body.dark-mode .card h3, 
+        body.dark-mode .card h2, 
+        body.dark-mode h4 {
+            color: #e94560 !important;
+            border-bottom-color: #0f3460 !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="soundOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; backdrop-filter: blur(5px);">
+        <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 4px solid #ffb6c1; box-sizing: border-box;">
+            <div style="font-size: 50px; animation: tilt 2s infinite linear; text-align: center;">🐾</div>
+            <h1 style="color: #ff6b81; margin: 15px 0 25px 0; font-size: 24px;">Kedilerin Büyülü Dünyası'na Hoş Geldiniz!</h1>
+            <p style="font-size: 17px; margin: 20px 0; color: #333; font-weight: bold; line-height: 1.4;">Sitenin keyfini kedi mırıltısı eşliğinde devam etmek ister misiniz?</p>
+            
+            <div style="background: #fff0f5; padding: 20px; border-radius: 10px; margin: 25px 0; border: 1px dashed #ffb6c1; text-align: left;">
+                <h4 style="margin: 0 0 10px 0; color: #ff6b81; font-size: 15px; border-left: 4px solid #ff6b81; padding-left: 8px;">🐾 Mırıltının İnsan Sağlığına Yararları:</h4>
+                <ul style="margin: 0; padding: 0; list-style: none; color: #444; font-size: 14px; display: flex; flex-direction: column; gap: 12px;">
+    <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span>❤️</span> 
+        <span><b style="color: #d63031;">Stresi ve anksiyeteyi</b> önemli ölçüde azaltmaya yardımcı olur.</span>
+    </li>
+    <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span>📈</span> 
+        <span><b style="color: #d63031;">Kan basıncını</b> düşürmeye yardımcı olabilir.</span>
+    </li>
+    <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span>🦴</span> 
+        <span>Mırıltının frekansı (25-150 Hz) <b style="color: #d63031;">kemiklerin iyileşmesini</b> hızlandırabilir ve kasları gevşetebilir.</span>
+    </li>
+</ul>
+            </div>
+
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <button onclick="handleUserChoice('yes')" style="background: #00b894; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: transform 0.2s; width: 45%;">Evet, mırıldansın 😻</button>
+                <button onclick="handleUserChoice('no')" style="background: #ff7675; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: transform 0.2s; width: 45%;">Hayır, sessiz kalsın 😿</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h1>Kedilerin Büyülü Dünyası</h1>
+<nav>
+            <button class="nav-btn active" onclick="openPage('anasayfa', this)">Ana Sayfa</button>
+            <button class="nav-btn" onclick="openPage('psikoloji', this)">Davranış & Psikoloji</button>
+            <button class="nav-btn" onclick="openPage('bakim', this)">Bakım & Sahiplenme</button>
+            <button class="nav-btn" onclick="openPage('hesaplamalar', this)">🧮 Kedisel Hesaplamalar</button>
+            <button class="nav-btn" onclick="openPage('galeri', this)">Medya Galerisi</button>
+            <button class="nav-btn" onclick="openPage('kulup', this)">🔑 Giriş Yap / Kaydol</button>
+            
+            <button id="darkModeBtn" onclick="toggleDarkMode()" style="background-color: #2f3542; color: white; margin-left: 20px; border-radius: 25px;">🌙 Gece Modu</button>
+       
+       <div id="navSoundPanel" style="display: none; align-items: center; gap: 8px; margin-left: 15px; background: rgba(255,107,129,0.1); padding: 4px 10px; border-radius: 50px; border: 1px solid rgba(255,107,129,0.2);">
+                <button id="navPlayPauseBtn" onclick="toggleNavPlay()" style="background: #ff6b81; color: white; border: none; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 11px; font-weight: bold; padding: 0;">⏸</button>
+                
+               <input type="range" id="navProgressBar" min="0" max="100" value="0" step="1" oninput="seekAudio()" style="display: none;">
+                
+               <span style="font-size: 14px; color: #ff6b81; margin-left: 8px;">🔊</span>
+<input type="range" id="navVolumeBar" class="kedi-ip-cubuk" min="0" max="1" value="0.5" step="0.1" oninput="updateVolume()" style="width: 130px; cursor: pointer; height: 6px; background: #ffb6c1; border-radius: 5px; appearance: none; -webkit-appearance: none;">
+            </div>
+        
+        </nav>
+    </header>
+
+    <section id="anasayfa" class="page-section active">
+        <div class="card">
+            <h3>Hoş Geldiniz!</h3>
+            <p>Eğer bu satırları okuyorsanız, muhtemelen dünyanın en gizemli ve en sevgi dolu canlılarından birinin, yani bir kedinin büyüsüne kapılmışsınız demektir. <strong>Patili Günlükler</strong>, sadece bir web sitesi değil; kedilerle yaşamayı bir sanat haline getirenler, hayatına yeni bir dost katmayı düşünenler ve yoğun bir günün ardından sadece birkaç dakika huzur arayanlar için tasarlanmış dijital bir sığınaktır.</p>
+            <p><strong>Neden Buradasınız?</strong><br>Belki de ilk kez bir kedi sahiplenme aşamasındasınız ve "Acaba hazır mıyım?" diye soruyorsunuz. Burada, bir kedinin sorumluluğunu almanın ötesinde, onunla kuracağınız o eşsiz bağın ipuçlarını bulacaksınız. Ya da halihazırda bir kedi personeli olarak dostunuzun davranışları hakkında daha derin bilgiler edinmek istiyorsunuz.</p>
+      
+      <div style="display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap;">
+    
+    <div style="flex: 1; min-width: 280px; background-color: #fff0f5; padding: 25px; border-radius: 15px; border: 2px dashed #ffb6c1; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <span style="font-size: 35px; animation: tilt 2s infinite linear; display: inline-block;">💡</span>
+        <h3 style="color: #ff6b81; margin: 10px 0;">Günün Miyav Bilgisi</h3>
+        <p id="gununBilgisi" style="font-size: 15px; color: #444; line-height: 1.5; font-weight: 500; min-height: 60px;">
+            Loading...
+        </p>
+        <button onclick="yeniBilgiGetir()" style="background: white; color: #ff6b81; border: 1px solid #ffb6c1; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.2s;">Başka Bilgi Ver 🐾</button>
+    </div>
+
+    <div style="flex: 1; min-width: 280px; background-color: #f8f9fa; padding: 20px; border-radius: 15px; border: 2px solid #e0e0e0; text-align: center;">
+        <h3 style="color: #2f3542; margin-top: 0; margin-bottom: 15px; font-size: 16px;">🎬 Günün Tatlı Videosu</h3>
+        <video id="gununVideosu" controls style="width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-height: 180px; object-fit: cover;">
+            <source src="medya/video1.mp4" type="video/mp4">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+    </div>
+
+</div>
+      
+      
+        </div>
+    </section>
+
+   <section id="psikoloji" class="page-section">
+        <div class="card-container">
+            <div class="card">
+                <h3 style="color: #ff6b81; border-bottom: 2px solid #ffb6c1; padding-bottom: 10px;">Kedi Psikolojisinin Temelleri ve İleri Beden Dili Analizi 🧠</h3>
+                <p style="font-style: italic; color: #666; margin-bottom: 25px;">Bir kedinin zihni, milyonlarca yıllık avcı içgüdüleri ile evcil yaşamın konforu arasında gidip gelen büyüleyici bir labirenttir.</p>
+
+                <div class="info-grid" style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                    <div class="info-item" style="background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; flex: 1; min-width: 280px; border: 1px solid #ffb6c1;">
+                        <h4 style="color: #e84393; margin-top:0;">🐾 Kuyruk Hareketleri</h4>
+                        <img src="medya/kuyruk.jpg" alt="Kuyruk" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom: 10px;">
+                        <p style="text-align: justify; font-size: 14px;">Kuyruk, bir kedinin sinir sisteminin dışarıya açılan kapısıdır. Soru işareti formundaki bir kuyruk, evrensel bir dostluk davetidir.</p>
+                    </div>
+
+                    <div class="info-item" style="background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; flex: 1; min-width: 280px; border: 1px solid #ffb6c1;">
+                        <h4 style="color: #e84393; margin-top:0;">👂 Kulak ve Bıyık</h4>
+                        <img src="medya/kulak.jpg" alt="Kulak" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom: 10px;">
+                        <p style="text-align: justify; font-size: 14px;">Kedilerin kulakları 32 farklı kas tarafından yönetilir. Kulakların arkaya doğru tamamen yatması, savunma veya saldırı pozisyonudur.</p>
+                    </div>
+
+                    <div class="info-item" style="background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; flex: 1; min-width: 280px; border: 1px solid #ffb6c1;">
+                        <h4 style="color: #e84393; margin-top:0;">👁️ Göz Bebekleri</h4>
+                        <p style="text-align: justify; font-size: 14px;">Göz bebeklerinin aniden büyümesi (fal taşı gibi) ya aşırı heyecan/oyun ya da büyük bir korku belirtisidir. Yavaşça göz kırpması ise kedilerin "seni seviyorum ve sana güveniyorum" deme şeklidir (Kedi öpücüğü).</p>
+                    </div>
+
+                    <div class="info-item" style="background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; flex: 1; min-width: 280px; border: 1px solid #ffb6c1;">
+                        <h4 style="color: #e84393; margin-top:0;">🛑 Karın Gösterme Tuzağı</h4>
+                        <p style="text-align: justify; font-size: 14px;">Bir kedi sırt üstü yatıp karnını gösteriyorsa, bu size %100 güvendiğini gösterir. Ancak bu her zaman "gel karnımı sev" demek değildir; çoğu kedi için bu bir savunma pozisyonudur ve dokunursanız patileriyle yakalayabilir!</p>
+                    </div>
+                </div>
+
+                <br><hr style="border: 0; border-top: 2px dashed #ffb6c1;"><br>
+
+                <h3 style="color: #ff6b81;">😻 Kedilerin Yapmayı Sevdiği Şeyler ve Anlamları</h3>
+                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px;">
+                    
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>1. Kafa Atmak (Bunting):</strong> Sahiplerine kafalarıyla dokunmaları, sizi kendi bölgeleri olarak işaretlemeleri ve "Sen benim ailemsin" demeleridir.
+                    </div>
+
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>2. Yoğurma Yapmak (Masaj):</strong> Patileriyle yumuşak yerleri ezmeleri, bebeklikten kalma bir huzur belirtisidir; kendilerini güvende ve mutlu hissederler.
+                    </div>
+
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>3. Yüksek Yerlerde Uyumak:</strong> Etrafı gözlemlemek ve güvende hissetmek için dolapların tepesini seçerler; bu onların "alan hakimiyeti" içgüdüsüdür.
+                    </div>
+
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>4. Kutulara Girmek:</strong> Kutunun darlığı onlara korunaklı bir sığınak hissi verir. Stres seviyelerini düşüren en büyük eğlenceleridir.
+                    </div>
+
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>5. Klavyenin Üstüne Oturmak:</strong> Sizin dikkatinizi çekmek ve "Şu an sadece benimle ilgilen" mesajı vermek için en çok kullandığınız eşyayı bloke ederler.
+                    </div>
+
+                    <div style="background: #fff5f6; padding: 15px; border-radius: 12px; border-left: 5px solid #ff6b81;">
+                        <strong>6. Gece Koşturmacaları (Zoomies):</strong> Gün boyu biriken enerjiyi patlatma anıdır. Vahşi doğadaki avcı saatlerinin evdeki yansımasıdır.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bakim" class="page-section">
+        <div class="card-container">
+            <div class="card">
+                <h2 style="color: #d63031; text-align: center;">🐱 Kedi Sahiplenme ve Yaşam Rehberi</h2>
+                <hr><br>
+                
+                <h3>📦 Sahiplenme Öncesi Eksiksiz İhtiyaç Listesi</h3>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <tr style="background-color: #fff5f6;">
+                        <th style="padding: 10px; border: 1px solid #ffb6c1;">Malzeme</th>
+                        <th style="padding: 10px; border: 1px solid #ffb6c1;">Avantaj</th>
+                    </tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Seramik/Çelik Kaplar</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Plastik kaplar bakteri tutar. Seramik/çelik hijyeniktir, kedi aknesini önler.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Otomatik Su Pınarı</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Böbrek sağlığı ve yeterli su tüketimi için hareketli su şarttır.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Sert Taşıma Çantası</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Olası sarsıntılara ve dış etkenlere karşı en güvenli sığınaktır.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Kedi Çimi</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Yutulan tüylerin atılmasını sağlar ve zehirli ev bitkilerini yemesini engeller.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Özel Tırnak Makası</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">İnsan tırnak makası kedi tırnağını çatlatır; özel makas tırnak yapısına uygundur.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>İnteraktif Oyuncaklar</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Avlanma içgüdüsünü tatmin eder, enerjisini atmasını sağlar ve obeziteyi önler.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Göz/Kulak Temizleme Solüsyonu</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Düzenli bakım, olası mantar, parazit ve enfeksiyon risklerini minimuma indirir.</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ffb6c1;"><strong>Yumuşak Kedi Yatağı</strong></td><td style="padding: 10px; border: 1px solid #ffb6c1;">Kediye ev içinde sınırları belli olan, kendine ait güvenli ve sıcak bir alan sunar.</td></tr>
+                </table>
+
+                <br><hr><br>
+
+        <h3 style="color: #d63031;">⚠️ Evdeki Hayati Güvenlik Kuralları</h3>
+<div style="background-color: #fff9f9; padding: 20px; border-left: 5px solid #d63031; border-radius: 5px;">
+    <ul style="line-height: 1.8; padding-left: 40px; margin: 0; list-style-type: disc;">
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Makineler:</strong> Çamaşır ve bulaşık makinelerinin içini çalıştırmadan hep kontrol edin.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Ocaklar:</strong> İndüksiyonlu olmayan sıcak ocaklarda pati yanığını engellemek için tencere bırakın.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>İpler ve Lastikler:</strong> Kediler geriye dönük dilleri yüzünden ipi yutmak zorunda kalır (Bağırsak düğümlenmesi).</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Klozet:</strong> Özellikle yavrular için boğulma ve zehirlenme riski taşır, kapağı daima kapalı tutun.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Açık Gıdalar:</strong> Soğan ve sarımsak anemi yapar, çikolata toksiktir.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Pencereler (Vasistas Tehlikesi):</strong> Sadece sineklik yetmez, çelik kedi filesi veya koruma mekanizması taktırılmalıdır. Özellikle üstten açılan <b>vasistas pencereler</b> kediler için ölümcül bir tuzaktır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Zehirli Bitkiler:</strong> Lilyum, Aloe Vera, Deve Tabanı gibi bitkiler kedi için zehirlidir.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>İlaçlar ve Vitaminler:</strong> Parasetamol gibi insan ilaçları kediler için ölümcüldür; kilitli dolaplarda saklanmalıdır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Açık Çöp Kutuları:</strong> Çöpteki tavuk kemikleri boğazlarını yırtabilir; mutlaka kapaklı çöp kutusu kullanılmalıdır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Uçucu Yağlar ve Buhurdanlıklar:</strong> Çay ağacı, okaliptüs gibi uçucu yağlar solunduğunda dahi karaciğerde toksik birikim yapar.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Naylon Poşetler:</strong> Poşet yalama takıntısı boğulma veya bağırsak tıkanması riski yaratır, ortada bırakılmamalıdır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Sıcak İçecekler:</strong> Masada bırakılan sıcak çay/kahve, zıplayan kediyle dökülüp ciddi yanıklara sebep olabilir.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Kapı Çarpmaları:</strong> Rüzgarlı havalarda aniden çarpan kapılar kırıklara yol açabilir; kapı stoperleri hayati önem taşır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Mekanizmalı Mobilyalar:</strong> Bazalı yataklar kapanırken veya mekanizmalı koltuklar açılırken araya sıkışma riski daima kontrol edilmelidir.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Piller ve Mıknatıslar:</strong> Yutulan piller asit reaksiyonuyla mideyi deler, mıknatıslar ise bağırsakları birbirine yapıştırarak ölümcül sonuçlar doğurur.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Mumlar ve Açık Ateş:</strong> Sessizce yanaşan bir kedinin kuyruğu kolayca alev alabilir; mumlar asla gözetimsiz bırakılmamalıdır.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Tuvalet Kağıdı Ruloları:</strong> Yalnız oynarken parçalanıp yutulan rulo kartonları sindirim sistemini ciddi şekilde tıkayabilir.</li>
+        <li style="display: list-item; margin-bottom: 10px;"><strong>Kimyasal Yüzey Temizleyiciler:</strong> Yere basan patilerine bulaşan deterjanlar, kedi yalanırken doğrudan midesine gider. Patili evlere özel organik temizleyiciler kullanılmalıdır.</li>
+    </ul>
+</div>
+
+                <br><hr><br>
+               
+                <br><hr style="border: 0; border-top: 2px dashed #ffb6c1;"><br>
+                <h3 style="color: #ff6b81; margin-top: 30px;">🗓️ Kapsamlı Kedi Bakım Çizelgesi</h3>
+                <table border="1" cellpadding="8" cellspacing="0" width="100%" bordercolor="#ffb6c1">
+                    <tr bgcolor="#ff9a9e">
+                        <td colspan="4" align="center"><font color="white" size="4"><b>🐾 Patili Dostumuzun Bakım ve Rutin Takvimi 🐾</b></font></td>
+                    </tr>
+                    <tr bgcolor="#fff0f5">
+                        <td align="center"><b>Periyot</b></td>
+                        <td align="center"><b>Zaman / Sıklık</b></td>
+                        <td align="center"><b>Bakım & Etkinlik Türü</b></td>
+                        <td align="center"><b>Detay / Süre</b></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" align="center" bgcolor="#fff9f9"><b>Haftalık<br>Rutin</b></td>
+                        <td align="center">Hafta İçi (Sabah-Akşam)</td>
+                        <td>Kum Temizliği, Taze Su ve Mama Takviyesi</td>
+                        <td align="center">Günde 2 Kez (10 Dk)</td>
+                    </tr>
+                    <tr>
+                        <td align="center">Her Akşam</td>
+                        <td>İnteraktif Oyun (Olta, Lazer vb.) ve Tüy Tarama</td>
+                        <td align="center">Günde 20 Dk</td>
+                    </tr>
+                    <tr>
+                        <td align="center">Hafta Sonu (Pazar)</td>
+                        <td colspan="2" align="center" bgcolor="#ffe4e1">Kum Kabının Komple Yıkanması ve Tırnak Kontrolü</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" align="center" bgcolor="#ffebef"><b>Aylık<br>Bakım</b></td>
+                        <td align="center">Ayda 1 Kez</td>
+                        <td>Dış Parazit Damlası Uygulaması</td>
+                        <td align="center">Veteriner veya Evde</td>
+                    </tr>
+                    <tr>
+                        <td align="center">Haftada 2-3 Kez</td>
+                        <td colspan="2" align="center" bgcolor="#ffd1dc">Malt Macunu Verilmesi (Tüy Yumağı Önleyici)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" align="center" bgcolor="#fff0f5"><b>Yıllık<br>Kontrol</b></td>
+                        <td align="center">Yılda 1 Kez</td>
+                        <td>Karma, Lösemi ve Kuduz Aşılarının Tekrarı</td>
+                        <td rowspan="2" align="center" bgcolor="#ffb6c1"><b>Kapsamlı<br>Klinik Ziyareti</b></td>
+                    </tr>
+                    <tr>
+                        <td align="center">Yılda 1 Kez</td>
+                        <td>Genel Kan Tahlili ve Check-up</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+<section id="hesaplamalar" class="page-section">
+        <div class="card-container">
+            <div class="card" style="border-top: 5px solid #00b894;">
+                <h2 style="color: #00b894; text-align: center;">🧮 Kedisel Hesaplamalar ve Raporlar</h2>
+                
+                <div class="hesap-kutu" style="background-color: #fff0f5; padding: 25px; border-radius: 15px; text-align: center; border: 2px dashed #ff9a9e; margin-top: 20px;">
+                    <h3 style="color: #d63031; margin-top: 0;">🐈 Kedi - İnsan Yaşı Hesaplayıcı</h3>
+                    <p>Kedinizin yaşını girin, insan yaşına göre kaç yaşında olduğunu hesaplayalım!</p>
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <input type="number" id="kediYasiGirdi" min="0" max="30" placeholder="Örn: 3" style="padding: 10px; border-radius: 8px; border: 1px solid #ffb6c1; width: 100px; font-size: 16px; text-align: center;">
+                        <button onclick="yasHesapla()" style="padding: 10px 20px; background-color: #ff6b81; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold;">Hesapla 🐾</button>
+                    </div>
+                    <h4 id="hesapSonucu" style="color: #ff6b81; font-size: 22px; margin-top: 20px; min-height: 30px;"></h4>
+                </div>
+
+                <div class="hesap-kutu" style="background-color: #f8f9fa; padding: 25px; border-radius: 15px; text-align: center; border: 2px dashed #00b894; margin-top: 20px;">
+                    <h3 style="color: #00b894; margin-top: 0;">🩺 Kapsamlı Bakım ve Malt Hesaplayıcı</h3>
+                    <p>Kedinizin yaşı, kilosu ve sağlık durumuna göre malt ve takviye önerilerini görelim.</p>
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <input type="number" id="kapsamliYas" min="0" placeholder="Yaş (Örn: 3)" style="padding: 10px; border-radius: 8px; border: 1px solid #00b894; width: 110px; text-align: center;">
+                        <input type="number" id="kapsamliKilo" step="0.1" placeholder="Kilo (Örn: 6.5)" style="padding: 10px; border-radius: 8px; border: 1px solid #00b894; width: 130px; text-align: center;">
+                        <select id="saglikDurumu" style="padding: 10px; border-radius: 8px; border: 1px solid #00b894;">
+                            <option value="saglikli">Genel Olarak Sağlıklı</option>
+                            <option value="deri">Deri ve Tüy Hassasiyeti / Alerji</option>
+                            <option value="bobrek">Böbrek / İdrar Yolu Hassasiyeti</option>
+                            <option value="sindirim">Hassas Sindirim / Kusma</option>
+                        </select>
+                        <button onclick="kapsamliHesapla()" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Önerileri Gör 📋</button>
+                    </div>
+                    <div id="kapsamliSonuc" style="margin-top: 20px; text-align: left; background: #fff; padding: 15px; border-radius: 8px; display: none; border-left: 5px solid #00b894; font-size: 15px;"></div>
+                </div>
+            </div>
+        </div>
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px; font-family: sans-serif;">
+
+    <div style="flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 15px; border: 2px dashed #ffb6c1; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;">
+        <h3 style="color: #ff6b81; margin-top: 0; border-bottom: 2px solid #fff0f5; padding-bottom: 10px;">🍗 Kalori & Porsiyon Asistanı</h3>
+        <p style="font-size: 13px; color: #636e72; margin-bottom: 20px;">Kedinizin kilosunu koruması için günde kaç gram kuru mama yemesi gerektiğini hesaplayın.</p>
+        
+        <div style="text-align: left; margin-bottom: 15px;">
+            <label style="font-size: 14px; font-weight: bold; color: #2d3436;">Kedinin Kilosu (kg):</label>
+            <input type="number" id="kaloriKilo" placeholder="Örn: 6.5 veya 8.5" step="0.1" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #dfe6e9; border-radius: 8px; box-sizing: border-box;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 20px;">
+            <label style="font-size: 14px; font-weight: bold; color: #2d3436;">Hareket Seviyesi:</label>
+            <select id="hareketSeviyesi" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #dfe6e9; border-radius: 8px; box-sizing: border-box; background: white;">
+                <option value="1.2">Tembel / Ev Kedisi / Kısırlaştırılmış</option>
+                <option value="1.4">Normal Aktivite</option>
+                <option value="1.6">Çok Aktif / Oyuncu / Hiperaktif</option>
+            </select>
+        </div>
+
+        <button onclick="hesaplaKalori()" style="width: 100%; padding: 10px; background: #ff6b81; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.2s;">Hesapla</button>
+
+        <div id="kaloriSonuc" style="display: none; margin-top: 20px; padding: 12px; background: #fff0f5; border-radius: 8px; font-size: 13px; color: #444; line-height: 1.5; border: 1px solid #ffe4e1; text-align: left;"></div>
+    </div>
+
+    <div style="flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 15px; border: 2px dashed #ffb6c1; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;">
+        <h3 style="color: #ff6b81; margin-top: 0; border-bottom: 2px solid #fff0f5; padding-bottom: 10px;">💧 Su Tüketimi Asistanı</h3>
+        <p style="font-size: 13px; color: #636e72; margin-bottom: 20px;">Kedinizin günlük su ihtiyacını beslenme tarzına ve hava sıcaklığına göre detaylı hesaplayın.</p>
+        
+        <div style="text-align: left; margin-bottom: 15px;">
+            <label style="font-size: 14px; font-weight: bold; color: #2d3436;">Kedinin Kilosu (kg):</label>
+            <input type="number" id="suKilo" placeholder="Örn: 6.5 veya 8.5" step="0.1" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #dfe6e9; border-radius: 8px; box-sizing: border-box;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 15px;">
+            <label style="font-size: 14px; font-weight: bold; color: #2d3436;">Beslenme Tipi:</label>
+            <select id="beslenmeTipi" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #dfe6e9; border-radius: 8px; box-sizing: border-box; background: white;">
+                <option value="kuru">Sadece Kuru Mama (%10 Su)</option>
+                <option value="karisik">Kuru + Yaş Mama Karışık</option>
+                <option value="yas">Ağırlıklı Yaş Mama / Çiğ Beslenme</option>
+            </select>
+        </div>
+
+        <div style="text-align: left; margin-bottom: 20px;">
+            <label style="font-size: 14px; font-weight: bold; color: #2d3436;">Hava Durumu:</label>
+            <select id="havaDurumu" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #dfe6e9; border-radius: 8px; box-sizing: border-box; background: white;">
+                <option value="normal">Normal / Serin (Oda Sıcaklığı)</option>
+                <option value="sicak">Sıcak / Bunaltıcı Yaz Ayları</option>
+            </select>
+        </div>
+
+        <button onclick="hesaplaSu()" style="width: 100%; padding: 10px; background: #00b894; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.2s;">Hesapla</button>
+
+        <div id="suSonuc" style="display: none; margin-top: 20px; padding: 12px; background: #e8f8f5; border-radius: 8px; font-size: 13px; color: #444; line-height: 1.5; border: 1px solid #1abc9c; text-align: left;"></div>
+    </div>
+
+</div>
+
+<script>
+    // kalori hesaplayan kısım
+    function hesaplaKalori() {
+        const kilo = parseFloat(document.getElementById('kaloriKilo').value);
+        const carpan = parseFloat(document.getElementById('hareketSeviyesi').value);
+        const sonucDiv = document.getElementById('kaloriSonuc');
+
+        if (!kilo || kilo <= 0) {
+            alert('Lütfen geçerli bir kilo girin!');
+            return;
+        }
+
+        const rer = (kilo * 30) + 70;
+        const gunlukKalori = Math.round(rer * carpan);
+        const gunlukMamaGram = Math.round(gunlukKalori / 4);
+
+        sonucDiv.style.display = 'block';
+        sonucDiv.innerHTML = `
+            <strong>🎯 Hesaplama Raporu:</strong><br>
+            • Kedinizin günlük enerji ihtiyacı: <strong>${gunlukKalori} kcal</strong><br>
+            • Günde yemesi gereken kuru mama: <strong>~${gunlukMamaGram} gram</strong> (Yaklaşık 1-1.5 çay bardağı)<br><br>
+            <small>⚠️ <em>Not: Kediniz eğer iri kemikli veya tosun bir kedi sınıfındaysa, ideal kilosunu korumak adına porsiyon kontrolünü hassas tartıyla yapmak hayati önem taşır.</em></small>
+        `;
+    }
+
+    // su ihtiyacını hesaplama
+    function hesaplaSu() {
+        const kilo = parseFloat(document.getElementById('suKilo').value);
+        const beslenme = document.getElementById('beslenmeTipi').value;
+        const hava = document.getElementById('havaDurumu').value;
+        const sonucDiv = document.getElementById('suSonuc');
+
+        if (!kilo || kilo <= 0) {
+            alert('Lütfen geçerli bir kilo girin!');
+            return;
+        }
+
+        let gunlukIhtiyac = kilo * 50;
+
+        if (hava === 'sicak') {
+            gunlukIhtiyac = gunlukIhtiyac * 1.2; 
+        }
+
+        gunlukIhtiyac = Math.round(gunlukIhtiyac);
+
+        let kaptanIcilecek;
+        let beslenmeNotu = "";
+
+        if (beslenme === 'kuru') {
+            kaptanIcilecek = gunlukIhtiyac;
+            beslenmeNotu = "Sadece kuru mama yediği için sıvı ihtiyacının TAMAMINI su kabından içmek zorunda. İdrar yolu enfeksiyonu riskine karşı su pınarı almayı düşünebilirsiniz.";
+        } else if (beslenme === 'karisik') {
+            kaptanIcilecek = Math.round(gunlukIhtiyac * 0.6); 
+            beslenmeNotu = "Yaş mamadan da sıvı aldığı için su kabından içmesi gereken miktar dengelidir. Çok sağlıklı bir yaklaşım!";
+        } else if (beslenme === 'yas') {
+            kaptanIcilecek = Math.round(gunlukIhtiyac * 0.3); 
+            beslenmeNotu = "Ağırlıklı yaş mama yediği için sıvı ihtiyacının büyük kısmını yemeğinden karşılıyor (tıpkı doğadaki gibi!). Kaptan daha az su içmesi tamamen normaldir.";
+            // console.log("yaş mama seçildi sıvı azaldı");
+        }
+
+        sonucDiv.style.display = 'block';
+        sonucDiv.innerHTML = `
+            <strong>💧 Detaylı Su Raporu:</strong><br>
+            • Toplam günlük sıvı ihtiyacı: <strong>${gunlukIhtiyac} ml</strong><br>
+            • <strong>Su kabından içmesi gereken net miktar: <span style="color:#00b894; font-size: 15px;">${kaptanIcilecek} ml</span></strong><br><br>
+            <small>💡 <em>Analiz: ${beslenmeNotu}</em></small>
+        `;
+    }
+</script>
+
+        
+    </section>
+    <section id="galeri" class="page-section">
+        <div class="card-container">
+            <div class="card">
+                <h2 style="text-align: center; color: #ff6b81;">🐾 Patili Medya Galerisi</h2>
+                <h3 style="border-left: 5px solid #ffb6c1; padding-left: 10px;">📸 Fotoğraf Albümü</h3>
+                <div class="photo-grid">
+                    <img src="medya/kedi1.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi2.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi3.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi4.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi5.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi6.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi7.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi8.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi9.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                    <img src="medya/kedi10.jpg" alt="Kedi" onclick="openLightbox(this.src)">
+                </div>
+
+                <br><hr><br>
+
+                <h3 style="border-left: 5px solid #ffb6c1; padding-left: 10px;">🎥 Video Arşivi</h3>
+                <div class="video-grid">
+                    <video controls><source src="medya/video1.mp4" type="video/mp4"></video>
+                    <video controls><source src="medya/video2.mp4" type="video/mp4"></video>
+                    <video controls><source src="medya/video3.mp4" type="video/mp4"></video>
+                    <video controls><source src="medya/video4.mp4" type="video/mp4"></video>
+                    <video controls><source src="medya/video5.mp4" type="video/mp4"></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="kulup" class="page-section">
+        <div class="card-container">
+            <div class="card">
+                <h2 style="color: #d63031; text-align: center;">🐾 Patili Günlükler Kulübü</h2>
+                <p style="text-align: center;">Kedi severler topluluğumuza katılın, hikayelerinizi paylaşın ve sürpriz içeriklerden haberdar olun!</p>
+                
+               
+
+                <br><hr style="border: 0; border-top: 2px dashed #ffb6c1;"><br>
+<h2 style="color: #d63031; text-align: center;">🐾 Patili Günlükler Kulübü</h2>
+
+<div style="max-width: 500px; margin: 0 auto; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; border: 2px solid #fecfef; background: #fff;">
+    
+    <div style="display: flex; background: #f8f9fa;">
+        <button id="btnUye" type="button" onclick="formModu('uye')" style="flex: 1; padding: 15px; background: #ff758c; color: white; border: none; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; outline: none;">📝 Yeni Üye Ol</button>
+        <button id="btnGiris" type="button" onclick="formModu('giris')" style="flex: 1; padding: 15px; background: transparent; color: #555; border: none; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; outline: none;">🔑 Giriş Yap</button>
+    </div>
+
+    <form id="kulupFormYeni" style="padding: 25px; margin: 0;">
+        
+        <div id="kutuAdSoyad" style="margin-bottom: 15px;">
+            <label style="font-weight: bold; color: #333;">Adınız Soyadınız:</label><br>
+            <input type="text" id="inputAdSoyad" placeholder="Örn: Ayşe Yılmaz" style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold; color: #333;">E-posta Adresiniz:</label><br>
+            <input type="email" placeholder="ornek@mail.com" style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold; color: #333;">Şifreniz:</label><br>
+            <input type="password" placeholder="••••••••" style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px;">
+        </div>
+
+        <div id="kutuKacHayvan" style="margin-bottom: 15px;">
+            <label style="font-weight: bold; color: #333;">Kaç Evcil Hayvanınız Var?</label><br>
+            <input type="number" min="0" placeholder="Örn: 2" style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px;">
+        </div>
+
+        <div id="kutuNeredenDuydunuz" style="margin-bottom: 20px;">
+            <label style="font-weight: bold; color: #333;">Sitemizi Nereden Duydunuz?</label><br>
+            <select style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px; background: white;">
+                <option value="google">Google / Arama Motoru</option>
+                <option value="sosyal">Sosyal Medya</option>
+                <option value="arkadas">Arkadaş Tavsiyesi</option>
+                <option value="diger">Diğer</option>
+            </select>
+        </div>
+
+        <input type="button" id="btnGonder" onclick="kulupIslemYap()" value="Üye Ol 🐾" style="width: 100%; background-color: #ff6b81; color: white; padding: 15px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(255,107,129,0.3); transition: transform 0.2s;">
+    </form>
+</div>
+
+<div style="max-width: 500px; margin: 30px auto 0 auto; background: #fff5f6; padding: 20px; border-radius: 15px; border: 1px dashed #ff758c; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+    <h4 style="color: #d63031; margin-top: 0; margin-bottom: 10px; font-size: 16px;">💬 Kulüp Anı Panosu (İsteğe Bağlı)</h4>
+    <p style="font-size: 13px; color: #666; margin-top: 0; margin-bottom: 12px;">Dostunuzla yaşadığınız komik veya unutulmaz bir anıyı topluluğumuzla paylaşmak ister misiniz?</p>
+    <textarea id="aniMesaj" rows="3" placeholder="Buraya yazabilirsiniz..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
+    <input type="button" onclick="aniGonder()" value="Anımı Paylaş 🐾" style="margin-top: 12px; background-color: #ff758c; color: white; padding: 8px 20px; border: none; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer;">
+</div>
+
+<script>
+    function formModu(mod) {
+        let btnGiris = document.getElementById('btnGiris');
+        let btnUye = document.getElementById('btnUye');
+        let kutuAdSoyad = document.getElementById('kutuAdSoyad');
+        let kutuKacHayvan = document.getElementById('kutuKacHayvan');
+        let kutuNeredenDuydunuz = document.getElementById('kutuNeredenDuydunuz');
+        let btnGonder = document.getElementById('btnGonder');
+
+        if(mod === 'giris') {
+            btnGiris.style.background = '#ff758c';
+            btnGiris.style.color = 'white';
+            btnUye.style.background = 'transparent';
+            btnUye.style.color = '#555';
+            
+            kutuAdSoyad.style.display = 'none'; 
+            kutuKacHayvan.style.display = 'none';
+            kutuNeredenDuydunuz.style.display = 'none';
+            
+            btnGonder.value = 'Giriş Yap 🚀';
+        } else {
+            btnUye.style.background = '#ff758c';
+            btnUye.style.color = 'white';
+            btnGiris.style.background = 'transparent';
+            btnGiris.style.color = '#555';
+            
+            kutuAdSoyad.style.display = 'block'; 
+            kutuKacHayvan.style.display = 'block';
+            kutuNeredenDuydunuz.style.display = 'block';
+            
+            btnGonder.value = 'Üye Ol 🐾';
+        }
+    }
+
+    function kulupIslemYap() {
+        let modText = document.getElementById('btnGonder').value;
+        if(modText.includes('Giriş')) {
+            alert('Kulübe başarıyla giriş yaptınız! 🚀');
+        } else {
+            alert('Harika! Kulübümüze kaydınız başarıyla oluşturuldu. 🥳');
+        }
+        document.getElementById('kulupFormYeni').reset(); 
+    }
+
+    function aniGonder() {
+        let ani = document.getElementById('aniMesaj').value;
+        if(ani.trim() === "") {
+            alert("Lütfen önce anınızı yazın! 🐾");
+            return;
+        }
+        alert("Harika anınız panomuza iletildi, teşekkür ederiz! ❤️");
+        document.getElementById('aniMesaj').value = "";
+    }
+</script>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>🐾 Bu web sitesini herkese kedi sevgisini aşılamak için tasarladım.</p>
+    </footer>
+
+    <audio id="catPurrAudio" loop>
+        <source src="medya/mirlama.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const overlay = document.getElementById('soundOverlay');
+        const navPanel = document.getElementById('navSoundPanel');
+        const audio = document.getElementById('catPurrAudio');
+        const playPauseBtn = document.getElementById('navPlayPauseBtn');
+        const volumeBar = document.getElementById('navVolumeBar');
+        const progressBar = document.getElementById('navProgressBar');
+
+        // sesi başta yarıya çektim
+        audio.volume = 0.5;
+
+        // girişteki evet-hayır butonu
+        function handleUserChoice(choice) {
+            if (choice === 'yes') {
+                audio.play(); 
+                playPauseBtn.innerText = '⏸'; 
+            } else {
+                audio.pause(); 
+                playPauseBtn.innerText = '▶️'; 
+            }
+            
+            // karşılama ekranını kapat menüyü getir
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                navPanel.style.display = 'flex'; // Paneli butonların yanına açar
+            }, 500);
+        }
+
+        // ses durdur başlat
+        function toggleNavPlay() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.innerText = '⏸';
+            } else {
+                audio.pause();
+                playPauseBtn.innerText = '▶️';
+            }
+        }
+
+        // ses ayarı barı
+        function updateVolume() {
+            audio.volume = volumeBar.value;
+        }
+
+        // seste ileri geri gitme
+        function seekAudio() {
+            const seekTo = audio.duration * (progressBar.value / 100);
+            audio.currentTime = seekTo;
+        }
+
+        // müzik çalarken bar da ilerlesin
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const percentage = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = percentage;
+            }
+        });
+
+        // günlük bilgiler
+        const kediBilgileri = [
+            "Kediler hayatlarının yaklaşık %70'ini uyuyarak geçirirler. Yani 9 yaşındaki bir kedi sadece 3 yıl uyanık kalmıştır!",
+            "Bir kedinin mırıltısı (25-150 Hz), insanlarda kemik ve kas dokularının iyileşmesini hızlandırıcı bir etkiye sahiptir.",
+            "Kedilerin her iki kulağında da tam 32 adet kas bulunur. Bu sayede kulaklarını yön bağımsız 180 derece döndürebilirler.",
+            "Kediler tatlı yiyeceklerin tadını alamazlar, çünkü dillerinde tatlı reseptörleri yoktur.",
+            "Her kedinin burun izi, tıpkı insanların parmak izi gibi tamamen kendine hastır ve eşsizdir.",
+            "Kediler kendi boylarının tam 6 katı yüksekliğe kadar tek bir sıçrayışta zıplayabilirler!",
+            "Yetişkin kediler sadece insanlarla iletişim kurmak için miyavlarlar. Kendi aralarında tıslama, mırıldama ve koku kullanırlar."
+        ];
+
+        // bilgiyi rastgele basıyor
+        function yeniBilgiGetir() {
+            const rastgeleIndeks = Math.floor(Math.random() * kediBilgileri.length);
+            document.getElementById("gununBilgisi").innerText = kediBilgileri[rastgeleIndeks];
+        }
+
+        // her gün farklı video açsın
+        function gununVideosunuAyarla() {
+            const bugun = new Date().getDay(); 
+            const videoNo = (bugun % 5) + 1; 
+            
+            const videoElementi = document.getElementById("gununVideosu");
+            if(videoElementi) {
+                videoElementi.src = `medya/video${videoNo}.mp4`;
+                // console.log("bugünün videosu: video" + videoNo); // kontrol için
+            }
+        }
+
+        // sayfa açılınca bunları yap
+        window.addEventListener('DOMContentLoaded', () => {
+            yeniBilgiGetir();
+            gununVideosunuAyarla();
+        });
+
+    </script>
+
+    <style>
+        @keyframes tilt {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #soundOverlay button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    </style>
+
+    <button onclick="tepeyeCik()" id="yukariBtn" title="Başa Dön">⬆️</button>
+
+    <style>
+        .lightbox-modal { display: none !important; position: fixed !important; z-index: 99999 !important; left: 0 !important; top: 0 !important; width: 100vw !important; height: 100vh !important; background-color: rgba(0,0,0,0.95) !important; }
+        .lightbox-modal.goster { display: flex !important; justify-content: center !important; align-items: center !important; }
+        .lightbox-content { max-width: 90% !important; max-height: 90vh !important; object-fit: contain !important; border: 5px solid white !important; border-radius: 10px !important; animation: zoomBox 0.3s ease-in-out; }
+        .close-lightbox { position: absolute !important; top: 20px !important; right: 40px !important; color: white !important; font-size: 60px !important; font-weight: bold !important; cursor: pointer !important; z-index: 100000 !important; }
+        @keyframes zoomBox { from {transform:scale(0.7)} to {transform:scale(1)} }
+    
+        /* yukari çık butonu css */
+        #yukariBtn {
+            display: none; 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            z-index: 9999; 
+            
+            font-size: 28px; 
+            background-color: #d63031; /* Belirgin, canlı bir kırmızı */
+            color: white; /* Okun rengi */
+            
+            border: none;
+            cursor: pointer;
+            padding: 15px 22px; 
+            border-radius: 50px; 
+            
+            box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5); 
+            transition: all 0.3s ease; 
+        }
+        
+        #yukariBtn:hover {
+            background-color: #ff6b81; 
+            transform: translateY(-8px) scale(1.1); 
+        }
+    </style>
+    
+    <div id="myLightbox" class="lightbox-modal">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="img01" src="">
+    </div>
+
+    <script>
+        // hocanın istediği kapsamlı hesaplama
+        function kapsamliHesapla() {
+            let yas = parseFloat(document.getElementById("kapsamliYas").value);
+            let kilo = parseFloat(document.getElementById("kapsamliKilo").value);
+            let saglik = document.getElementById("saglikDurumu").value;
+            let sonucKutusu = document.getElementById("kapsamliSonuc");
+            
+            if (isNaN(yas) || isNaN(kilo) || kilo <= 0 || yas < 0) {
+                alert("Lütfen geçerli bir yaş ve kilo giriniz! 🙀");
+                return;
+            }
+
+            let fizikselDurum = "";
+            let maltMiktari = "";
+            let fircalama = "";
+            let yasKiloTavsiyesi = "";
+
+            if (yas < 3) {
+                if (kilo < 3.5) {
+                    fizikselDurum = "Genç ve Zayıf/Narin";
+                    maltMiktari = "Haftada 1-2 gün, <b>1.5 - 2 cm</b> (Sindirim sistemini yormadan).";
+                    fircalama = "Haftada 2 kez yumuşak fırça ile.";
+                    yasKiloTavsiyesi = "<li><b>Gelişim Desteği:</b> Gelişim çağında olduğu için kilo alımını ve kas yapısını desteklemek adına yüksek enerjili/kalorili yavru-genç kedi vitaminleri kullanılabilir.</li>";
+                } else if (kilo >= 3.5 && kilo <= 5.5) {
+                    fizikselDurum = "Genç ve İdeal Kiloda";
+                    maltMiktari = "Haftada 2-3 gün, <b>2 - 3 cm</b>.";
+                    fircalama = "Haftada 2 kez standart tarama.";
+                    yasKiloTavsiyesi = "<li><b>Koruma:</b> Tamamen ideal gelişiminde. İskelet sistemini güçlendirmek için standart kalsiyum ve taurin destekleri yeterlidir.</li>";
+                } else {
+                    fizikselDurum = "Genç ve İri Kıyım / Erken Obezite Riski";
+                    maltMiktari = "Haftada 3 gün, <b>3 - 4 cm</b>.";
+                    fircalama = "Haftada 3 kez, alt karın bölgesine ağırlık vererek.";
+                    yasKiloTavsiyesi = "<li><b>Erken Kilo Kontrolü:</b> Genç yaşta yüksek kilo ileride diyabete yol açar. Maması porsiyonlanmalı, bol interaktif oyun ile enerjisi atılmalıdır.</li>";
+                }
+            } else if (yas >= 3 && yas < 7) {
+                if (kilo < 4.0) {
+                    fizikselDurum = "Yetişkin ve Zayıf Form";
+                    maltMiktari = "Haftada 2 gün, <b>2 cm</b>.";
+                    fircalama = "Haftada 2 kez normal tarama.";
+                    yasKiloTavsiyesi = "<li><b>İştah Desteği:</b> Yetişkin bir kedi için kilosu sınırda. İştah açıcı B-Kompleks vitamin macunları denenebilir.</li>";
+                } else if (kilo >= 4.0 && kilo < 6.5) {
+                    fizikselDurum = "Yetişkin ve İdeal Form";
+                    maltMiktari = "Haftada 2-3 gün, <b>3 cm</b>.";
+                    fircalama = "Haftada 2-3 kez düzenli tarama.";
+                    yasKiloTavsiyesi = "<li><b>Stabilizasyon:</b> Kilosu ve yaşı harika bir dengede. Yılda bir kez genel kan tahlili (check-up) rutinine başlanmalıdır.</li>";
+                } else {
+                    fizikselDurum = "Yetişkin ve İri/Yüksek Kilolu (Örn: 6.5kg - 8.5kg)";
+                    maltMiktari = "Haftada 3-4 gün, <b>4 - 5 cm</b> (Geniş vücut yüzeyi ekstra tüy yutmaya sebep olur).";
+                    fircalama = "Haftada en az 3-4 kez furminator vb. ile derin tarama.";
+                    yasKiloTavsiyesi = "<li><b>Karaciğer Alarmı:</b> Yüksek kilolarda karaciğer yağlanması (Lipidoz) riski artar. Yağ yakımını destekleyen L-Karnitin takviyeleri ve kesinlikle *şekersiz* malt tercih edilmelidir.</li>";
+                }
+            } else {
+                if (kilo < 4.0) {
+                    fizikselDurum = "Yaşlı (Geriatrik) ve Zayıf";
+                    maltMiktari = "Haftada 2 gün, <b>2 cm</b>.";
+                    fircalama = "Haftada 2 kez, deriyi incitmeden çok yumuşak fırçayla.";
+                    yasKiloTavsiyesi = "<li><b>Geriatrik Zayıflama Uyarısı:</b> Yaşlı kedilerde ani kilo kaybı tiroid (hipertiroidizm) veya böbrek yetmezliği belirtisi olabilir. Mutlaka SDMA böbrek tahlili yaptırılmalıdır.</li>";
+                } else if (kilo >= 4.0 && kilo < 6.0) {
+                    fizikselDurum = "Yaşlı (Geriatrik) ve İdeal Form";
+                    maltMiktari = "Haftada 2-3 gün, <b>2 - 3 cm</b>.";
+                    fircalama = "Haftada 2-3 kez nazik tarama.";
+                    yasKiloTavsiyesi = "<li><b>Yaşlılık Desteği:</b> İlerleyen yaşta kıkırdak sıvıları azalır. Yaşam kalitesini artırmak için Glukozamin ve Kondroitin başlanması harika olur.</li>";
+                } else {
+                    fizikselDurum = "Yaşlı (Geriatrik) ve Yüksek Kilolu";
+                    maltMiktari = "Haftada 3-4 gün, <b>4 cm</b>.";
+                    fircalama = "Haftada 3 kez, arka kısımlara (kendi ulaşamadığı yerlere) yardım ederek.";
+                    yasKiloTavsiyesi = "<li><b>Eklem Hasarı Riski:</b> Hem yaşlılık hem de yüksek kilo (örn 8kg+), eklemlere (osteoartrit) maksimum baskı yapar. Güçlü eklem destekleri (MSM, Glukozamin) ve ağrı kesici diyetler şarttır.</li>";
+                }
+            }
+
+            let takviyeler = "<ul style='margin-top: 10px; line-height: 1.6; padding-left: 20px;'>";
+            takviyeler += yasKiloTavsiyesi;
+
+            if (saglik === "saglikli") {
+                takviyeler += "<li><b>Hassasiyet Durumu:</b> Ekstra bir sağlık sorunu seçilmedi. Günlük rutinde Multi-vitamin ve Taurin macunlarına devam edebilirsiniz.</li>";
+            } else if (saglik === "deri") {
+                takviyeler += "<li><b>Hassasiyet (Deri/Tüy):</b> Kilo ve yaştan bağımsız olarak deri bariyerini güçlendirmek için ekstra <b>Somon Yağı (Omega 3) ve Biotin</b> kullanmalısınız.</li>";
+            } else if (saglik === "bobrek") {
+                takviyeler += "<li><b>Hassasiyet (Böbrek):</b> İdrar yolları için pH dengeleyici (Kızılcık/DL-Methionine) tabletler kullanın ve su tüketimini artırmak için bol yaş mama verin.</li>";
+            } else if (saglik === "sindirim") {
+                takviyeler += "<li><b>Hassasiyet (Sindirim):</b> Bağırsak florası için Probiyotik tozları kullanın. Maltı tek seferde 4 cm vermek yerine, kusmayı önlemek için her gün 1 cm olarak bölün.</li>";
+            }
+            takviyeler += "</ul>";
+
+            let uyariMesaji = `
+            <div style="background-color: #fff4f4; padding: 15px; border-left: 5px solid #d63031; margin-top: 20px; font-size: 13px; border-radius: 6px;">
+                <strong style="color: #d63031; font-size: 15px;">🛑 VETERİNER HEKİM TAVSİYESİ BİLDİRİMİ</strong><br><br>
+                Bu algoritma, yaş ve kilo oranlarına göre genel veteriner literatürü baz alınarak hazırlanmıştır. Hiçbir algoritma fiziksel muayenenin veya kan tahlilinin yerini tutamaz. Uygulamadan önce <b>KESİNLİKLE kendi veteriner hekiminize danışınız.</b>
+            </div>`;
+
+            sonucKutusu.innerHTML = `
+                <h3 style="color: #00b894; margin-top:0; border-bottom: 2px solid #00b894; padding-bottom: 8px;">🔬 Kapsamlı Bakım Raporu</h3>
+                <p style="margin-bottom: 5px; font-size: 16px;"><b>Tespit Edilen Form:</b> <span style="color:#e84393;">${fizikselDurum}</span></p>
+                
+                <div style="background: #e8f8f5; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #00b894;">
+                    <b style="color:#00b894;">🌾 Malt ve Tarama Rutini:</b><br>
+                    ${maltMiktari}<br>
+                    <i style="color: #555;">Tarama Önerisi: ${fircalama}</i>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <b style="color:#0984e3;">💊 Yaş, Kilo ve Sağlık Odaklı Takviye Protokolü:</b>
+                    ${takviyeler}
+                </div>
+                
+                ${uyariMesaji}
+            `;
+            sonucKutusu.style.display = "block";
+        }
+
+        // karanlık mod
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let btn = document.getElementById("darkModeBtn");
+            
+            if(document.body.classList.contains("dark-mode")) {
+                btn.innerText = "☀️ Gündüz Modu";
+                btn.style.backgroundColor = "#f1c40f";
+                btn.style.color = "#333";
+            } else {
+                btn.innerText = "🌙 Gece Modu";
+                btn.style.backgroundColor = "#2f3542";
+                btn.style.color = "white";
+            }
+        }
+
+        // kedi insan yaşı bulma
+        function yasHesapla() {
+            let yasGirdisi = document.getElementById("kediYasiGirdi").value;
+            let sonucYazisi = document.getElementById("hesapSonucu");
+            
+            if (yasGirdisi === "" || yasGirdisi < 0) {
+                sonucYazisi.innerText = "Lütfen geçerli bir yaş girin! 🙀";
+                return;
+            }
+            
+            let yas = parseFloat(yasGirdisi);
+            let insanYasi = 0;
+            
+            if (yas <= 1) {
+                insanYasi = yas * 15;
+            } else if (yas <= 2) {
+                insanYasi = 24;
+            } else {
+                insanYasi = 24 + ((yas - 2) * 4);
+            }
+            
+            sonucYazisi.innerText = "Kediniz insan yaşıyla tam " + insanYasi + " yaşında! 😻";
+        }
+
+        // tıklandığında sayfayı değiştiren kısım
+        function openPage(pageId, btnElement) {
+            let pages = document.querySelectorAll('.page-section');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+
+            let buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(function(btn) {
+                if(btn.id !== "darkModeBtn") { 
+                    btn.classList.remove('active');
+                }
+            });
+            btnElement.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // fotoğrafa tıklayınca büyüyor
+        function openLightbox(imgSrc) {
+            var modal = document.getElementById("myLightbox");
+            var modalImg = document.getElementById("img01");
+            modalImg.src = imgSrc;
+            modal.classList.add("goster");
+        }
+
+        function closeLightbox() {
+            var modal = document.getElementById("myLightbox");
+            modal.classList.remove("goster");
+        }
+
+        document.getElementById("myLightbox").onclick = function(e) {
+            if (e.target !== document.getElementById("img01")) {
+                closeLightbox();
+            }
+        }
+
+        // sayfa inince ok butonu çıksın
+        window.onscroll = function() {
+            let yukariBtn = document.getElementById("yukariBtn");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                yukariBtn.style.display = "block";
+            } else {
+                yukariBtn.style.display = "none";
+            }
+        };
+
+        function tepeyeCik() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // aşağı inince kartlar çıksın diye eklendi
+        const gozlemci = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('goster-kart');
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // kartları yakala sınıf ekle
+            const kartlar = document.querySelectorAll('.card');
+            kartlar.forEach((kart) => {
+                kart.classList.add('gizli-kart');
+                gozlemci.observe(kart);
+            });
+
+            // en başta anasayfa açık gelsin
+            const firstBtn = document.querySelector('.nav-btn');
+            if(firstBtn) {
+                openPage('anasayfa', firstBtn);
+            }
+        });
+    </script>
+
+<style>
+    /* düşen konfeti cssleri */
+    @keyframes kediKonfetiDus {
+        0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    .kedi-konfeti {
+        position: fixed;
+        top: -10%;
+        z-index: 999999;
+        pointer-events: none; /* butonları kitlemesin diye */
+        animation: kediKonfetiDus linear forwards;
+    }
+</style>
+
+<script>
+    function patlatKediKonfeti() {
+        const emojiler = ['🐾', '🐈', '😻', '✨', '🧶'];
+        const sure = 3000; 
+        const bitisZamani = Date.now() + sure;
+
+        // emojileri basıyor
+        const interval = setInterval(() => {
+            if (Date.now() > bitisZamani) {
+                clearInterval(interval); 
+                return;
+            }
+
+            const konfeti = document.createElement('div');
+            konfeti.innerText = emojiler[Math.floor(Math.random() * emojiler.length)];
+            konfeti.className = 'kedi-konfeti';
+            
+            konfeti.style.left = Math.random() * 100 + 'vw';
+            
+            konfeti.style.animationDuration = (Math.random() * 2 + 2) + 's'; 
+            
+            konfeti.style.fontSize = (Math.random() * 20 + 15) + 'px';
+
+            document.body.appendChild(konfeti);
+
+            // silmezsem sayfa kasıyor
+            setTimeout(() => {
+                konfeti.remove();
+            }, 5000); 
+        }, 50); 
+    }
+
+    // başlangıçta çağır
+    window.addEventListener('DOMContentLoaded', patlatKediKonfeti);
+</script>
+
+</body>
+</html>
